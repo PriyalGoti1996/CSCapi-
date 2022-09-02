@@ -1,0 +1,38 @@
+.main-form {
+    /* border: 2px solid black; */
+    height: 100%;
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+}
+
+#form-id {
+    border: none;
+    border-bottom: 2px solid #1890ff;
+    padding: 5px 10px;
+    outline: none;
+    width: 80%;
+
+}
+
+[placeholder]:focus::-webkit-input-placeholder {
+    transition: text-indent 0.4s 0.4s ease;
+    text-indent: -100%;
+    opacity: 1;
+}
+
+#btn-sub {
+    margin-top: 20px;
+    /* position: relative; */
+    margin-left: 140px;
+}
+#btn{
+    background-color: #1890ff;
+    border-radius: 15px;
+   
+   
+}
+.heading-main{
+    margin-top: 50px;
+   
+}
