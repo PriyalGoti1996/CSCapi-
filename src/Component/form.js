@@ -2,23 +2,26 @@ import { useEffect, useRef, useState } from 'react';
 import './form.css'
 import View from './View';
 import axios from "axios";
+import Icon from "react-icons-kit";
+import { trash } from "react-icons-kit/feather/trash"
+import Login from './Login';
 
 
 //getting the valuue from local storage
-const getDatafromLS = () => {
-    const data = localStorage.getItem("data");
-    if (data) {
-        return JSON.parse(data)
-    }
-    else {
-        return []
-    }
-}
+// const getDatafromLS = () => {
+//     const data = localStorage.getItem("data");
+//     if (data) {
+//         return JSON.parse(data)
+//     }
+//     else {
+//         return []
+//     }
+// }
 
 function Form() {
     //main array of object//
 
-    const [FormData, setFormData] = useState(getDatafromLS())
+    // const [FormData, setFormData] = useState(getDatafromLS())
 
     //input Field
     const [id, setId] = useState('');
@@ -27,38 +30,40 @@ function Form() {
     const [phon, setPhone] = useState('');
     const [gender, setgender] = useState('');
     const [radioCheck, setRadiocheck] = useState({ male: false, female: false, other: false, })
-    const [data, setadata] = useState([])
-    const [getstate, setstae] = useState([])
-    const [getcity, setcity] = useState([])
-    const [dcountry, setdcountry] = useState("")
-    const [dstate, setdstate] = useState("")
-    const ref = useRef()
+    const [flag, setFlag] = useState(false)
+    const [login, setLogin] = useState(true)
+    // const [data, setadata] = useState([])
+    // const [getstate, setstae] = useState([])
+    // const [getcity, setcity] = useState([])
+    // const [dcountry, setdcountry] = useState("")
+    // const [dstate, setdstate] = useState("")
+    // const ref = useRef()
     //select //
-    useEffect(() => {
-        axios.get("https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json")
-            .then((res) => setadata(res.data)
-            ).catch((e) => console.log(e))
-    }, [])
+    // useEffect(() => {
+    //     axios.get("https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json")
+    //         .then((res) => setadata(res.data)
+    //         ).catch((e) => console.log(e))
+    // }, [])
     // return country without
-    const country = [...new Set(data?.map((item) => item.country))]
-    country.sort()
-     // return state without repeat
-     const countryhandler = (e) => {
-        setdcountry(e.target.value)
-        let state = data.filter((state) => state.country === e.target.value)
-        let singlestate = [...new Set(state.map((item) => item.subcountry))]
-        singlestate.sort()
-        setstae(singlestate)
-    }
-     // return city
-     const cityhandler = (e) => {
-        setdstate(e.target.value)
-        let city = data.filter((city) => city.subcountry === e.target.value)
-        let singlecity = [...new Set(city.map((item) => item.name))]
-        singlecity.sort()
-        setcity(singlecity)
-        getcity.map((val) => console.log(val))
-     }
+    // const country = [...new Set(data?.map((item) => item.country))]
+    // country.sort()
+    //  // return state without repeat
+    //  const countryhandler = (e) => {
+    //     setdcountry(e.target.value)
+    //     let state = data.filter((state) => state.country === e.target.value)
+    //     let singlestate = [...new Set(state.map((item) => item.subcountry))]
+    //     singlestate.sort()
+    //     setstae(singlestate)
+    // }
+    //  // return city
+    //  const cityhandler = (e) => {
+    //     setdstate(e.target.value)
+    //     let city = data.filter((city) => city.subcountry === e.target.value)
+    //     let singlecity = [...new Set(city.map((item) => item.name))]
+    //     singlecity.sort()
+    //     setcity(singlecity)
+    //     getcity.map((val) => console.log(val))
+    //  }
     //radio
     const changeRadio = (e) => {
         setRadiocheck(() => {
@@ -73,54 +78,73 @@ function Form() {
         setgender(...gender, [e.target.value])
     }
     //saving data in localstorage
-    useEffect(() => {
-        localStorage.setItem('data', JSON.stringify(FormData))
-    }, [FormData])
+    // useEffect(() => {
+    //     localStorage.setItem('data', JSON.stringify(FormData))
+    // }, [FormData])
 
     //Deleting data in table//
-    const DelectSubmit = (id) => {
-        const DeletDatainTB = FormData.filter((element, index) => {
-            return element.id !== id
-        })
-        setFormData(DeletDatainTB)
-    }
+    // const DelectSubmit = (id) => {
+    //     const DeletDatainTB = FormData.filter((element, index) => {
+    //         return element.id !== id
+    //     })
+    //     setFormData(DeletDatainTB)
+    // }
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        let newref = ref.current.value;
-        const selectdata = { dcountry, dstate, newref }
-        console.log(selectdata);
-        //creat object
-        let SubMitaData = {
-            id,
-            name,
-            email,
-            phon,
-            gender,
-            dcountry,
-            dstate,
-            newref
-        
-        }
-        setFormData([...FormData, SubMitaData,selectdata])
-        setId('');
-        setName('');
-        setEmail('');
-        setPhone('');
-        setgender('')
-        setRadiocheck({
-            male: false,
-            female: false,
-            other: false,
-        })
-        setadata([""])
-        
-        
+        // let newref = ref.current.value;
+        // const selectdata = { dcountry, dstate, newref }
+        // console.log(selectdata);
+        // //creat object
+        // let SubMitaData = {
+        //     id,
+        //     name,
+        //     email,
+        //     phon,
+        //     gender,
+        //     dcountry,
+        //     dstate,
+        //     newref
 
+        // }
+        // setFormData([...FormData, SubMitaData,selectdata])
+        // setId('');
+        // setName('');
+        // setEmail('');
+        // setPhone('');
+        // setgender('')
+        // setRadiocheck({
+        //     male: false,
+        //     female: false,
+        //     other: false,
+        // })
+        // setadata([""])
+        if(!id ||!name ||!email ||!phon || !gender)
+        {
+            setFlag(true)
+        }
+        else{
+            setFlag(false)
+            localStorage.setItem("id",JSON.stringify(id))
+            localStorage.setItem("name",JSON.stringify(name))
+            localStorage.setItem("email",JSON.stringify(email))
+            localStorage.setItem("phone",JSON.stringify(phon))
+            localStorage.setItem("gender",JSON.stringify(gender))
+            console.log("data is stored in localstorage");
+            setLogin(!login)
+        }
+      
+    }
+    const handleClick=()=>{
+        console.log("hello i am already login");
+        setLogin(!login)
     }
     return (
         <>
             <div>
+            {
+                login ? 
+            
                 <form className="main-form" onSubmit={handleSubmit}>
                     <div className="row">
                         <div className="col">
@@ -156,7 +180,7 @@ function Form() {
                         </div>
                     </div>
                     <br />
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="col-ml">
                             <select onChange={countryhandler} >
                                 <option>select country</option>
@@ -171,18 +195,23 @@ function Form() {
                                 {getcity?.map((val, i) => <option key={i} name="city"  value={val}>{val}</option>)}
                             </select>
                         </div>
-                    </div>
+                    </div> */}
 
 
                     <div className="form-group row" id="btn-sub">
                         <div className="col-sm-10">
                             <button type="submit" className="btn btn-primary" id="btn">Sign in</button>
                         </div>
+                        <p onClick={handleClick}>Already registred {""} login in ?</p>
+                        {
+                            flag && <h1>please fill Every Field</h1>
+                        }
                     </div>
                 </form>
-
+                :
+                        <Login></Login>}
             </div>
-            <div className='view-container'>
+            {/* <div className='view-container'>
                 {FormData.length < 1 ? <div>No Data are added yet</div> : <div>
                     <table className="table table-striped">
                         <thead>
@@ -196,17 +225,35 @@ function Form() {
                                 <th scope="col">State</th>
                                 <th scope="col">City</th>
                                 <th scope="col">Delete</th>
-                                </tr>
+                            </tr>
                         </thead>
                         <tbody>
+                            {
+                                FormData.map((value, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{value.id}</td>
+                                            <td>{value.name}</td>
+                                            <td>{value.email}</td>
+                                            <td>{value.phon}</td>
+                                            <td>{value.gender}</td>
+                                            <td>{value.dcountry}</td>
+                                            <td>{value.dstate}</td>
+                                            <td>{value.newref}</td>
+                                            <td style={{ color: "red" }} onClick={() => DelectSubmit(value.id)}><Icon icon={trash} /></td>
+                                        </tr>
+
+                                    )
+                                })
+                            }
                             <View FormData={FormData} DelectSubmit={DelectSubmit}></View>
                         </tbody>
                     </table>
 
                 </div>}
-              
+
                 <button type="button" className="btn btn-lg btn-primary" id="btn" onClick={() => setFormData([])}>Delete All Data</button>
-            </div>
+            </div> */}
         </>
     );
 }
